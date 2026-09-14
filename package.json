@@ -1,0 +1,166 @@
+{
+  "name": "mantiq",
+  "displayName": "Mantiq & Nizam Language Support",
+  "description": "Tree-sitter based Semantic Highlighting for Mantiq and Nizam",
+  "version": "1.0.0",
+  "publisher": "mantiq",
+  "icon": "assets/icon.png",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mantiq/mantiq.git"
+  },
+  "engines": {
+    "vscode": "^1.107.0"
+  },
+  "categories": [
+    "Programming Languages"
+  ],
+  "activationEvents": [
+    "onLanguage:mantiq",
+    "onLanguage:nizam",
+    "workspaceContains:**/*.mq",
+    "workspaceContains:**/*.nz",
+    "onCommand:mantiq.run",
+    "onCommand:mantiq.build",
+    "onCommand:mantiq.stop",
+    "onStartupFinished"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "languages": [
+      {
+        "id": "mantiq",
+        "aliases": [
+          "Mantiq",
+          "mantiq"
+        ],
+        "extensions": [
+          ".mq"
+        ],
+        "icon": {
+          "light": "./assets/mantiq/icon_light.png",
+          "dark": "./assets/mantiq/icon_dark.png"
+        },
+        "configuration": "./language-configuration.json"
+      },
+      {
+        "id": "nizam",
+        "aliases": [
+          "Nizam",
+          "nizam"
+        ],
+        "extensions": [
+          ".nz"
+        ],
+        "icon": {
+          "light": "./assets/nizam/icon_light.png",
+          "dark": "./assets/nizam/icon_dark.png"
+        },
+        "configuration": "./language-configuration.json"
+      }
+    ],
+    "grammars": [
+      {
+        "language": "mantiq",
+        "scopeName": "source.mantiq",
+        "path": "./syntaxes/mantiq.tmLanguage.json"
+      },
+      {
+        "language": "nizam",
+        "scopeName": "source.mantiq",
+        "path": "./syntaxes/mantiq.tmLanguage.json"
+      }
+    ],
+    "commands": [
+      {
+        "command": "mantiq.run",
+        "title": "Mantiq: Run File",
+        "category": "Mantiq",
+        "icon": "$(play)"
+      },
+      {
+        "command": "mantiq.build",
+        "title": "Mantiq: Build Project",
+        "category": "Mantiq",
+        "icon": "$(gear)"
+      },
+      {
+        "command": "mantiq.stop",
+        "title": "Mantiq: Stop Execution",
+        "category": "Mantiq",
+        "icon": "$(debug-stop)"
+      }
+    ],
+    "menus": {
+      "editor/title": [
+        {
+          "command": "mantiq.run",
+          "when": "!mantiq.isRunning && (resourceExtname == .mq || resourceExtname == .nz || editorLangId == mantiq || editorLangId == nizam)",
+          "group": "navigation@1"
+        },
+        {
+          "command": "mantiq.build",
+          "when": "!mantiq.isRunning && (resourceExtname == .mq || resourceExtname == .nz || editorLangId == mantiq || editorLangId == nizam)",
+          "group": "navigation@2"
+        },
+        {
+          "command": "mantiq.stop",
+          "when": "mantiq.isRunning",
+          "group": "navigation@3"
+        }
+      ],
+      "editor/context": [
+        {
+          "command": "mantiq.run",
+          "when": "resourceExtname == .mq || resourceExtname == .nz || editorLangId == mantiq || editorLangId == nizam",
+          "group": "1_mantiq@1"
+        },
+        {
+          "command": "mantiq.build",
+          "when": "resourceExtname == .mq || resourceExtname == .nz || editorLangId == mantiq || editorLangId == nizam",
+          "group": "1_mantiq@2"
+        },
+        {
+          "command": "mantiq.stop",
+          "when": "mantiq.isRunning",
+          "group": "1_mantiq@3"
+        }
+      ]
+    },
+    "keybindings": [
+      {
+        "command": "mantiq.run",
+        "key": "ctrl+f5",
+        "when": "editorLangId == mantiq || editorLangId == nizam"
+      },
+      {
+        "command": "mantiq.build",
+        "key": "ctrl+shift+b",
+        "when": "editorLangId == mantiq || editorLangId == nizam"
+      },
+      {
+        "command": "mantiq.stop",
+        "key": "shift+f5",
+        "when": "mantiq.isRunning"
+      }
+    ]
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "package": "vsce package"
+  },
+  "dependencies": {
+    "vscode-languageclient": "^9.0.1",
+    "vscode-languageserver": "^9.0.1",
+    "vscode-languageserver-textdocument": "^1.0.12",
+    "web-tree-sitter": "^0.26.9"
+  },
+  "devDependencies": {
+    "@types/node": "^25.9.1",
+    "@types/vscode": "^1.107.0",
+    "@vscode/vsce": "^3.9.1",
+    "typescript": "^6.0.3"
+  }
+}

@@ -1,0 +1,157 @@
+{
+  "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+  "name": "Mantiq",
+  "patterns": [
+    {
+      "include": "#comments"
+    },
+    {
+      "include": "#strings"
+    },
+    {
+      "include": "#keywords"
+    },
+    {
+      "include": "#constants"
+    },
+    {
+      "include": "#types"
+    },
+    {
+      "include": "#numbers"
+    },
+    {
+      "include": "#decorators"
+    },
+    {
+      "include": "#functions"
+    }
+  ],
+  "repository": {
+    "comments": {
+      "patterns": [
+        {
+          "match": "//.*$",
+          "name": "comment.line.double-slash.mantiq"
+        },
+        {
+          "begin": "/\\*",
+          "end": "\\*/",
+          "name": "comment.block.mantiq"
+        }
+      ]
+    },
+    "strings": {
+      "patterns": [
+        {
+          "begin": "\"\"\"",
+          "end": "\"\"\"",
+          "name": "string.quoted.triple.double.mantiq"
+        },
+        {
+          "begin": "'''",
+          "end": "'''",
+          "name": "string.quoted.triple.single.mantiq"
+        },
+        {
+          "begin": "\"",
+          "end": "\"",
+          "name": "string.quoted.double.mantiq",
+          "patterns": [
+            {
+              "match": "\\\\.",
+              "name": "constant.character.escape.mantiq"
+            }
+          ]
+        },
+        {
+          "begin": "'",
+          "end": "'",
+          "name": "string.quoted.single.mantiq",
+          "patterns": [
+            {
+              "match": "\\\\.",
+              "name": "constant.character.escape.mantiq"
+            }
+          ]
+        }
+      ]
+    },
+    "keywords": {
+      "patterns": [
+        {
+          "match": "\\b(extern|import|link)\\s*(\\[([a-zA-Z_][a-zA-Z0-9_]*)\\])?",
+          "captures": {
+            "1": {
+              "name": "storage.modifier.mantiq"
+            },
+            "3": {
+              "name": "entity.name.tag.mantiq"
+            }
+          }
+        },
+        {
+          "match": "\\b(if|elif|else|for|while|loop|break|continue|return|match|case|defer|spawn|yield|await|pass|raise|try|except|finally|with)\\b",
+          "name": "keyword.control.mantiq"
+        },
+        {
+          "match": "\\b(public|private|internal|protected|const|mut|ref|deref|static|extern|volatile|atomic|abstract|final|override|async|inline|unsafe|block)\\b",
+          "name": "storage.modifier.mantiq"
+        },
+        {
+          "match": "\\b(fn|struct|enum|interface|trait|impl|type|alias|union|class|macro|let|var|import|from|link)\\b",
+          "name": "storage.type.mantiq"
+        },
+        {
+          "match": "\\b(as|to|ptr|is|in|and|or|not)\\b",
+          "name": "keyword.operator.mantiq"
+        }
+      ]
+    },
+    "constants": {
+      "patterns": [
+        {
+          "match": "\\b(true|false|True|False|None|null|self)\\b",
+          "name": "constant.language.mantiq"
+        }
+      ]
+    },
+    "types": {
+      "patterns": [
+        {
+          "match": "\\b(i8|i16|i32|i64|i128|i256|i512|i1024|u8|u16|u32|u64|u128|u256|u512|u1024|isize|usize|f16|bf16|f32|f64|f128|f256|f512|bool|char|byte|str|cstr|webstr|asciistr|rangestr|utf8str|ptr|void|Any|String|Option|List|Dict|Set|Result|Codepoint|Diagnostic|Span|Label|Severity|Suggestion|PyObject)\\b",
+          "name": "support.type.mantiq"
+        },
+        {
+          "match": "\\b[A-Z][a-zA-Z0-9_]*\\b",
+          "name": "entity.name.type.mantiq"
+        }
+      ]
+    },
+    "numbers": {
+      "patterns": [
+        {
+          "match": "\\b\\d+(\\.\\d+)?\\b|#[0-9a-fA-F]{3,8}\\b",
+          "name": "constant.numeric.mantiq"
+        }
+      ]
+    },
+    "decorators": {
+      "patterns": [
+        {
+          "match": "@[a-zA-Z_][a-zA-Z0-9_]*",
+          "name": "entity.name.tag.mantiq"
+        }
+      ]
+    },
+    "functions": {
+      "patterns": [
+        {
+          "match": "\\b([a-zA-Z_][a-zA-Z0-9_]*)\\s*(?=\\()",
+          "name": "entity.name.function.mantiq"
+        }
+      ]
+    }
+  },
+  "scopeName": "source.mantiq"
+}

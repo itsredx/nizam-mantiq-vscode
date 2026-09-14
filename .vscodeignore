@@ -1,0 +1,16 @@
+.vscode/**
+.vscode-test/**
+out/**/*.map
+src/**
+.gitignore
+.yarnrc
+**/*.ts
+*.js
+!out/extension.js
+!out/server.js
+!node_modules/web-tree-sitter/web-tree-sitter.js
+!node_modules/web-tree-sitter/web-tree-sitter.wasm
+!test.js
+tsconfig.json
+vsc-extension-quickstart.md
+readme.md
