@@ -27,6 +27,27 @@
   "indentationRules": {
     "increaseIndentPattern": "^\\s*(fn|struct|class|interface|enum|union|if|elif|else|while|for|match|case|try|except|finally|with|block|unsafe).*:\\s*$",
     "decreaseIndentPattern": "^\\s*(elif|else|except|finally|case).*:\\s*$"
-  }
+  },
+  "onEnterRules": [
+    {
+      "beforeText": "^\\s*(fn|struct|class|interface|enum|union|if|elif|else|while|for|match|case|try|except|finally|with|block|unsafe).*:\\s*$",
+      "action": {
+        "indent": "indent"
+      }
+    },
+    {
+      "beforeText": "^.*[\\{\\[\\(]\\s*$",
+      "afterText": "^\\s*[\\}\\]\\)]",
+      "action": {
+        "indent": "indentOutdent"
+      }
+    },
+    {
+      "beforeText": "^.*[\\{\\[\\(]\\s*$",
+      "action": {
+        "indent": "indent"
+      }
+    }
+  ]
 }
 
